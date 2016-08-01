@@ -16,49 +16,49 @@ from pyhht.utils import extr, boundary_conditions
 
 
 class EmpiricalModeDecomposition(object):
-    """The EMD class."""
-
-    def __init__(self, x, t=None, threshold_1=0.05, threshold_2=0.5, alpha=0.05,
-                 is_mode_complex=None, ndirs=4, fixe=0, maxiter=2000,
-                 fixe_h=0, n_imfs=0, nbsym=2):
-        """Empirical mode decomposition.
-
-        :param x: A vector on which to perform empirical mode decomposition.
-        :param t: Sampling time instants.
-        :param threshold_1: Threshold for the stopping criterion, corresponding to
+    """Empirical mode decomposition implemented as a class.
+    Params:
+    ------
+        x: array-like
+            A vector on which to perform empirical mode decomposition.
+        t: array-like
+            Sampling time instants.
+        threshold_1: float
+            Threshold for the stopping criterion, corresponding to
             :math:`\theta_{1}` in [1] (Default: 0.05)
-        :param threshold_2: Threshold for the stopping criterion, corresponding to
+        threshold_2: float
+            Threshold for the stopping criterion, corresponding to
             :math:`\theta_{2}` in [1] (Default: 0.5)
-        :param alpha: Tolerance for the stopping criterion, corresponding to
+        alpha: float
+            Tolerance for the stopping criterion, corresponding to
             :math:`\alpha` in [1] (Default: 0.05)
-        :param is_mode_complex: Whether the input signal is complex.
-        :param ndirs: Number of directions in which envelopes are computed.
+        is_mode_complex: bool
+            Whether the input signal is complex.
+        ndirs: int
+            Number of directions in which envelopes are computed.
             (Default: 4)
-        :param fixe: Number of sifting iterations to perform for each mode. The
+        fixe: int
+            Number of sifting iterations to perform for each mode. The
             default value is ``None``, in which case the default stopping criterion
             is used. If not ``None``, each mode will be a result of exactly
             ``fixe`` sifting iterations.
-        :param maxiter: Number of maximum sifting iterations for the
+        maxiter: int
+            Number of maximum sifting iterations for the
             computation of each mode. (Default: 2000)
-        :param fixe_h:
-        :param n_imfs: Number if IMFs to extract.
-        :param nbsym: Number of points to mirror when calculating envelopes.
-        :type x: array-like
-        :type t: array-like
-        :type threshold_1: float
-        :type threshold_2: float
-        :type alpha: float
-        :type is_mode_complex: bool
-        :type ndirs: int
-        :type fixe: int
-        :type maxiter: int
-        :type fixe_h: int
-        :type n_imfs: int
-        :type nbsym: int
-        :return: Array of shape [n_imfs + 1, length(x)]
-        :rtype: numpy.ndarray
-        :Example:
+        fixe_h: int
 
+         n_imfs: int
+            Number if IMFs to extract.
+        nbsym: int
+            Number of points to mirror when calculating envelopes.
+        
+    Return: 
+    ------
+        EMD: numpy.ndarray
+            Array of shape [n_imfs + 1, length(x)]
+
+    Example:
+    -------
         >>> from pyhht.visualization import plot_imfs
         >>> t = linspace(0, 1, 1000)
         >>> modes = sin(2 * pi * 5 * t) + sin(2 * pi * 10 * t)
@@ -70,6 +70,11 @@ class EmpiricalModeDecomposition(object):
         .. plot:: ../../docs/examples/simple_emd.py
         """
 
+
+    def __init__(self, x, t=None, threshold_1=0.05, threshold_2=0.5, alpha=0.05,
+                 is_mode_complex=None, ndirs=4, fixe=0, maxiter=2000,
+                 fixe_h=0, n_imfs=0, nbsym=2):
+        """ Empirical Mode Decomposition Class instantiation"""
         self.threshold_1 = threshold_1
         self.threshold_2 = threshold_2
         self.alpha = alpha
