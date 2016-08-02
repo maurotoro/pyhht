@@ -21,18 +21,27 @@ def inst_freq(x, t=None, L=1):
     Compute the instantaneous frequency of an analytic signal at specific
     time instants using the trapezoidal integration rule.
 
-    :param x: The input analytic signal
-    :param t: The time instants at which to calculate the instantaneous frequencies.
-    :param L: Non default values are currently not supported.
+    Parameters
+    ----------
+    x : numpy.ndarray
+        The input analytic signal
+    
+    t : numpy.ndarray
+        The time instants at which to calculate the instantaneous frequencies.
+    
+    L : int
+        Non default values are currently not supported.
         If L is 1, the normalized instantaneous frequency is computed. If L > 1,
         the maximum likelihood estimate of the instantaneous frequency of the
         deterministic part of the signal.
-    :type x: numpy.ndarray
-    :type t: numpy.ndarray
-    :type L: int
-    :return: instantaneous frequencies of the input signal.
-    :rtype: numpy.ndarray
-    :Example:
+
+    Returns
+    -------
+    fnorm : numpy.ndarray
+        instantaneous frequencies of the input signal.
+
+    Example
+    -------
     >>> from tftb.generators import fmsin
     >>> x = fmsin(70, 0.05, 0.35, 25)[0]
     >>> instf, timestamps = inst_freq(x)
@@ -63,18 +72,26 @@ def boundary_conditions(x, t, z=None, nbsym=2):
     """
     Extend the signal beyond it's bounds w.r.t mirror symmetry.
 
-    :param x: Signal to be mirrored.
-    :param t: Timestamps of the signal
-    :param z: Signal on whose extrema the interpolation is evaluated. (By \
+    Parameters
+    ----------
+    x : array-like
+        Signal to be mirrored.
+    
+    t : array-like
+        Timestamps of the signal
+
+    z : array-like
+        Signal on whose extrema the interpolation is evaluated. (By \
         default this is just ``x``)
-    :param nbsym: Number of points added to each end of the signal.
-    :type x: array-like
-    :type t: array-like
-    :type z: array-like
-    :type nbsym: int
-    :return: timestamps and values of extended extrema, ordered as (minima \
+
+    nbsym : int
+        Number of points added to each end of the signal.
+
+    Returns
+    -------
+    timestamps : tuple
+        timestamps and values of extended extrema, ordered as (minima \
         timestamps, maxima timestamps, minima values, maxima values.)
-    :rtype: tuple
     """
     indmax = argrelmax(x)[0]
     indmin = argrelmin(x)[0]
@@ -200,14 +217,18 @@ def get_envelops(x, t=None):
 
 def extr(x):
     """Extract the indices of the extrema and zero crossings.
+    
+    Parameters
+    ----------
+    x : array-like
+        input signal
 
-    :param x: input signal
-    :type x: array-like
-    :return: indices of minima, maxima and zero crossings.
-    :rtype: tuple
+    Returns
+    -------
+    minimas : tuple
+        indices of minima, maxima and zero crossings.
     """
     m = x.shape[0]
-
     x1 = x[:m - 1]
     x2 = x[1:m]
     indzer = find(x1 * x2 < 0)

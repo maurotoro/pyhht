@@ -16,16 +16,26 @@ import numpy as np
 def plot_imfs(signal, imfs, time_samples=None, fignum=None):
     """Visualize decomposed signals.
 
-    :param signal: Analyzed signal
-    :param time_samples: time instants
-    :param imfs: intrinsic mode functions of the signal
-    :param fignum: (optional) number of the figure to display
-    :type signal: array-like
-    :type time_samples: array-like
-    :type imfs: array-like of shape (n_imfs, length_of_signal)
-    :type fignum: int
-    :return: None
-    :Example:
+    Parameters
+    ----------
+    signal : array-like
+        Analyzed signal
+
+    time_samples : array-like
+        time instants
+
+    imfs : array-like, shape (n_imfs, lenght_of_signal)
+        intrinsic mode functions of the signal
+
+    fignum : int
+        (optional) number of the figure to display
+
+    Returns
+    -------
+    None
+
+    Example:
+    -------
 
     >>> plot_imfs(signal)
 

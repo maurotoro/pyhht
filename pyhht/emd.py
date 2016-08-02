@@ -17,44 +17,55 @@ from pyhht.utils import extr, boundary_conditions
 
 class EmpiricalModeDecomposition(object):
     """Empirical mode decomposition implemented as a class.
-    Params:
-    ------
-        x: array-like
+
+    Parameters
+    ----------
+        x : array-like
             A vector on which to perform empirical mode decomposition.
-        t: array-like
+    
+        t : array-like
             Sampling time instants.
-        threshold_1: float
+        
+        threshold_1 : float
             Threshold for the stopping criterion, corresponding to
             :math:`\theta_{1}` in [1] (Default: 0.05)
-        threshold_2: float
+        
+        threshold_2 : float
             Threshold for the stopping criterion, corresponding to
             :math:`\theta_{2}` in [1] (Default: 0.5)
-        alpha: float
+        
+        alpha : float
             Tolerance for the stopping criterion, corresponding to
             :math:`\alpha` in [1] (Default: 0.05)
-        is_mode_complex: bool
+        
+        is_mode_complex : bool
             Whether the input signal is complex.
-        ndirs: int
+
+        ndirs : int
             Number of directions in which envelopes are computed.
             (Default: 4)
-        fixe: int
+        
+        fixe : int
             Number of sifting iterations to perform for each mode. The
             default value is ``None``, in which case the default stopping criterion
             is used. If not ``None``, each mode will be a result of exactly
             ``fixe`` sifting iterations.
-        maxiter: int
+        
+        maxiter : int
             Number of maximum sifting iterations for the
             computation of each mode. (Default: 2000)
-        fixe_h: int
+        
+        fixe_h : int
 
-         n_imfs: int
+        n_imfs : int
             Number if IMFs to extract.
-        nbsym: int
+        
+        nbsym : int
             Number of points to mirror when calculating envelopes.
         
-    Return: 
-    ------
-        EMD: numpy.ndarray
+    Returns 
+    -------
+        EMD : numpy.ndarray
             Array of shape [n_imfs + 1, length(x)]
 
     Example:
@@ -151,10 +162,11 @@ class EmpiricalModeDecomposition(object):
 
         Where :math:`C_{i}` is the :math:`i` th IMF.
 
-        :return: Index of orthogonality.
-        :rtype: float
-        :Example:
-
+        returns : float
+            Index of orthogonality.
+        
+        Example:
+        -------
         >>> t = linspace(0, 1, 1000)
         >>> modes = sin(2 * pi * 5 * t) + sin(2 * pi * 10 * t)
         >>> x = modes + t
@@ -260,9 +272,11 @@ class EmpiricalModeDecomposition(object):
 
     def stop_sifting(self, m):
         """Evaluate the stopping criteria for the current mode.
-
-        :param m: The current mode
-        :type m: array-like
+        
+        Parameters
+        ----------
+        m : array-like
+            The current mode
         """
         # FIXME: This method needs a better name.
         if self.fixe:
